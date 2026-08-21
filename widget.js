@@ -388,9 +388,9 @@
       "  padding: 18px 18px 14px;",
       "  box-shadow: " + t.shadow + ";",
       "}",
-      ".kr-header { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:16px; }",
+      ".kr-header { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:16px; }",
       ".kr-kommune { font-size: " + (isList ? "18px" : "21px") + "; font-weight: 800; line-height:1.15; }",
-      ".kr-logo { height: 36px; flex: none; margin-top: 2px;}",
+      ".kr-logo { height: 36px; flex: none; }",
       ".kr-logo img { height: 36px; width: auto; display:block;}",
 
       // grid layout (5 columns, vertical bar gauges)
