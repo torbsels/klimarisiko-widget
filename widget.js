@@ -524,7 +524,7 @@
     }
 
     var footer = el("div", "kr-footer");
-    var link = el("a", "kr-link", "Se full rapport →");
+    var link = el("a", "kr-link", "Utforsk klimarisikorangeringen →");
     link.href = DASHBOARD_URL;
     link.target = "_blank";
     link.rel = "noopener";
