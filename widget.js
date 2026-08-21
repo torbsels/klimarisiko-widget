@@ -58,7 +58,7 @@
   // that's 2100 — projected, not current). For an external widget showing
   // "how much climate risk does this municipality face", the 2025 reference
   // period reads more naturally as a default — override with data-year.
-  var DEFAULT_YEAR = "2025";
+  var DEFAULT_YEAR = "2100";
   var DASHBOARD_URL = "https://klimamonitor.no/klimarisiko";
 
   var CATEGORY_ORDER = ["f", "e", "s", "r"];
