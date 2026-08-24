@@ -58,7 +58,7 @@
   // that's 2100 — projected, not current). For an external widget showing
   // "how much climate risk does this municipality face", the 2025 reference
   // period reads more naturally as a default — override with data-year.
-  var DEFAULT_YEAR = "2100";
+  var DEFAULT_YEAR = "2025";
   var DASHBOARD_URL = "https://klimamonitor.no/klimarisiko";
 
   var CATEGORY_ORDER = ["f", "e", "s", "r"];
@@ -241,18 +241,6 @@
       });
     });
 
-    // Global (cross-year) min/max of total — matches getDistributionDomain()
-    var totMin = Infinity;
-    var totMax = -Infinity;
-    years.forEach(function (year) {
-      Object.keys(total[year]).forEach(function (id) {
-        var v = total[year][id];
-        if (v === null) return;
-        if (v < totMin) totMin = v;
-        if (v > totMax) totMax = v;
-      });
-    });
-
     function levelOf(v, mn, mx, inv) {
       if (v === null || v === undefined) return null;
       if (mx <= mn) return 1;
@@ -303,9 +291,24 @@
         },
         false
       );
+
+      // Total-risk bucket domain: THIS YEAR's own min/max only (not pooled
+      // across years) — so the bar count reflects where this municipality
+      // sits within the range actually shown for the year being displayed,
+      // and matches what you'd get sanity-checking against the dashboard's
+      // own per-year distribution.
+      var yearTotMin = Infinity;
+      var yearTotMax = -Infinity;
+      ids.forEach(function (id) {
+        var v = total[year][id];
+        if (v === null) return;
+        if (v < yearTotMin) yearTotMin = v;
+        if (v > yearTotMax) yearTotMax = v;
+      });
+
       var totalLevels = {};
       ids.forEach(function (id) {
-        totalLevels[id] = levelOf(total[year][id], totMin, totMax, false);
+        totalLevels[id] = levelOf(total[year][id], yearTotMin, yearTotMax, false);
       });
 
       var catRanks = {};
@@ -388,10 +391,10 @@
       "  padding: 18px 18px 14px;",
       "  box-shadow: " + t.shadow + ";",
       "}",
-      ".kr-header { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:16px; }",
+      ".kr-header { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:16px; }",
       ".kr-kommune { font-size: " + (isList ? "18px" : "21px") + "; font-weight: 800; line-height:1.15; }",
-      ".kr-logo { height: 44px; flex: none; }",
-      ".kr-logo img { height: 44px; width: auto; display:block;}",
+      ".kr-logo { height: 18px; flex: none; margin-top: 2px; }",
+      ".kr-logo img { height: 18px; width: auto; display:block; }",
 
       // grid layout (5 columns, vertical bar gauges)
       ".kr-gauges { display:flex; gap:9px; }",
@@ -524,7 +527,7 @@
     }
 
     var footer = el("div", "kr-footer");
-    var link = el("a", "kr-link", "Utforsk klimarisikorangeringen →");
+    var link = el("a", "kr-link", "Se full rapport →");
     link.href = DASHBOARD_URL;
     link.target = "_blank";
     link.rel = "noopener";
