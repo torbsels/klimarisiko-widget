@@ -391,10 +391,10 @@
       "  padding: 18px 18px 14px;",
       "  box-shadow: " + t.shadow + ";",
       "}",
-      ".kr-header { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:16px; }",
+      ".kr-header { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:16px; }",
       ".kr-kommune { font-size: " + (isList ? "18px" : "21px") + "; font-weight: 800; line-height:1.15; }",
-      ".kr-logo { height: 44px; flex: none; }",
-      ".kr-logo img { height: 44px; width: auto; display:block;}",
+      ".kr-logo { height: 18px; flex: none; margin-top: 2px; }",
+      ".kr-logo img { height: 18px; width: auto; display:block; }",
 
       // grid layout (5 columns, vertical bar gauges)
       ".kr-gauges { display:flex; gap:9px; }",
@@ -527,7 +527,7 @@
     }
 
     var footer = el("div", "kr-footer");
-    var link = el("a", "kr-link", "Utforsk klilmarisikorangeringen →");
+    var link = el("a", "kr-link", "Se full rapport →");
     link.href = DASHBOARD_URL;
     link.target = "_blank";
     link.rel = "noopener";

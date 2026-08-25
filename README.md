@@ -39,12 +39,22 @@ earlier "average + guess" version:
    since low response capacity means high risk).
 4. **Rank** = the municipality's position among all 357, compared only
    within the selected year (rank 1 = highest risk).
-5. **Bar-gauge level** (1–5) = which fifth of the min–max range the score
-   falls into — the same domain-splitting logic the dashboard's own map
-   colouring uses, direction-corrected for Respons.
+5. **Bar-gauge level** (1–5) = which fifth of a min–max range the score
+   falls into, direction-corrected for Respons. For the four categories
+   that range is always exactly 0–100 (by construction, from step 2). For
+   **Total risk specifically**, the range is taken from **only the
+   selected year's own values** (not pooled across all three years) — so
+   the bar count reflects where a municipality sits within the spread
+   actually shown for the year being displayed. This was a deliberate
+   change from the dashboard's own approach (its internal colour-domain
+   code pools all years together), made after checking a specific case —
+   Tromsø in 2100 — against the dashboard's own displayed range and
+   finding the per-year domain matched what was expected; the pooled
+   version did not.
 
 This is no longer a guess dressed up as a plausible default — it's the
-same formula the dashboard itself runs, verified line-by-line against
+same formula the dashboard itself runs (with that one intentional
+deviation on the total-risk bucket domain), verified line-by-line against
 the source. `widget.js`'s file header has the full detail and the exact
 files it was ported from.
 
