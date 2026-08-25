@@ -63,6 +63,15 @@
         <option value="grid">Rutenett (5 kolonner)</option>
         <option value="list">Liste (smalere, stables)</option>
       </select>
+      <label for="year-select" style="margin-top:10px;">År (data-year):</label>
+      <select id="year-select">
+        <option value="2025">2025 (referanse)</option>
+        <option value="2050">2050 (nær framtid)</option>
+        <option value="2100">2100 (fjern framtid — dashbordets eiga standardvisning)</option>
+      </select>
+      <div class="note">
+        Widgeten viser 2025 som standard. Dashbordet ditt viser 2100 som standard (siste år i lista). Hvis du samanliknar tal mot dashbordet, sjekk kva år det viser der òg.
+      </div>
     </div>
 
     <!-- The actual embed: a container div + one script tag. -->
@@ -75,6 +84,7 @@
   var select = document.getElementById('kommune-select');
   var themeSelect = document.getElementById('theme-select');
   var layoutSelect = document.getElementById('layout-select');
+  var yearSelect = document.getElementById('year-select');
   var title = document.getElementById('profile-title');
 
   function remount() {
@@ -88,6 +98,7 @@
     fresh.setAttribute('data-klimarisiko-widget', '');
     if (themeSelect.value === 'light') fresh.setAttribute('data-theme', 'light');
     if (layoutSelect.value === 'list') fresh.setAttribute('data-layout', 'list');
+    if (yearSelect.value !== '2025') fresh.setAttribute('data-year', yearSelect.value);
     container.replaceWith(fresh);
     window.klimarisikoWidget.mount(fresh);
   }
@@ -95,6 +106,7 @@
   select.addEventListener('change', remount);
   themeSelect.addEventListener('change', remount);
   layoutSelect.addEventListener('change', remount);
+  yearSelect.addEventListener('change', remount);
 
   // initialise from URL if present, else default to first option
   (function () {
